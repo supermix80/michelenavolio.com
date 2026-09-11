@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DY7FPZ8E8L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DY7FPZ8E8L', { anonymize_ip: true });
+  </script>
+
+  <title>Michele Navolio — Scrittore, Indie Developer, Anno Zero</title>
+  <meta name="description" content="Michele Navolio, indie developer iOS da Rozzano (MI): app Swift/SwiftUI, trilogia FIRE AnnoZero." />
+  <meta name="author" content="Michele Navolio" />
+  <meta property="og:title" content="Michele Navolio — Scrittore, Indie Developer, Anno Zero" />
+  <meta property="og:description" content="Scrittore, sviluppatore iOS, nomade digitale. Autore della trilogia FIRE AnnoZero." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.michelenavolio.com" />
+  <link rel="canonical" href="https://www.michelenavolio.com" />
+
+  <!-- Rel=me per verifica identità brand -->
+  <link rel="me" href="https://www.instagram.com/michele_navolio/" />
+  <link rel="me" href="https://www.linkedin.com/in/michelenavolio/" />
+  <link rel="me" href="https://medium.com/@michelenavolio" />
+
+  <!-- Favicon & icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph esteso -->
+  <meta property="og:image" content="https://www.michelenavolio.com/assets/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="Michele Navolio" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@michele_navolio" />
+  <meta name="twitter:creator" content="@michele_navolio" />
+  <meta name="twitter:title" content="Michele Navolio — Anno Zero" />
+  <meta name="twitter:description" content="Ex bancario, indie developer iOS, scrittore. Racconto la transizione verso la libertà finanziaria in tempo reale." />
+  <meta name="twitter:image" content="https://www.michelenavolio.com/assets/og-cover.jpg" />
+
+  <!-- Mobile browser chrome color -->
+  <meta name="theme-color" content="#C17C3A" />
+  <meta name="color-scheme" content="light dark" />
+
+  <!-- Schema.org Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Michele Navolio",
+    "url": "https://www.michelenavolio.com",
+    "image": "https://www.michelenavolio.com/assets/og-cover.jpg",
+    "jobTitle": "Scrittore e Indie Developer iOS",
+    "description": "Ex Project Manager bancario (Banca Mediolanum), sviluppatore iOS indie, autore della trilogia FIRE AnnoZero. Racconto la transizione verso la libertà finanziaria e professionale in tempo reale.",
+    "nationality": "Italian",
+    "birthDate": "1980",
+    "birthPlace": {
+      "@type": "City",
+      "name": "Milano",
+      "addressCountry": "IT"
+    },
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Apple Developer Academy",
+      "url": "https://www.developeracademy.unina.it"
+    },
+    "knowsAbout": [
+      "Sviluppo iOS",
+      "SwiftUI",
+      "Libertà finanziaria",
+      "FIRE movement",
+      "Nomadismo digitale",
+      "Project Management",
+      "Vita in camper",
+      "Indie development"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Navolio App Studio"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rozzano",
+      "addressRegion": "MI",
+      "addressCountry": "IT"
+    },
+    "sameAs": [
+      "https://www.instagram.com/michele_navolio/",
+      "https://www.linkedin.com/in/michelenavolio/",
+      "https://medium.com/@michelenavolio",
+      "https://www.vanniapp.com"
+    ]
+  }
+  </script>
+
+  <style>
+    /* ─── Design tokens ─── */
+    :root {
+      --bg:       #FAFAF8;
+      --bg-card:  #F4EFE8;
+      --bg-dark:  #14130F;
+      --ink:      #1C1A16;
+      --ink-2:    #4A4540;
+      --ink-3:    #8A8078;
+      --amber:    #C17C3A;
+      --fire:     #E85D04;
+      --fire-2:   #FF7A1A;
+      --cream:    #FFF8F0;
+      --border:   #E2D9CF;
+
+      --font-serif: Georgia, 'Times New Roman', serif;
+      --font-sans:  system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+      --max:      1140px;
+      --r:        12px;
+      --trans:    0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Utility ─── */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Nav ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 250, 248, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: var(--max); margin: 0 auto; padding: 0 24px;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      transition: color var(--trans);
+    }
+    .nav-logo:hover { color: var(--amber); }
+    .nav-logo span { color: var(--amber); }
+
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      letter-spacing: 0.03em;
+      color: var(--ink-2);
+      transition: color var(--trans);
+    }
+    .nav-links a:hover { color: var(--amber); }
+
+    .nav-cta {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--amber);
+      color: #fff !important;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background var(--trans), transform var(--trans);
+    }
+    .nav-cta:hover { background: var(--fire); transform: translateY(-1px); }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 64px;
+      background:
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(193,124,58,0.08) 0%, transparent 70%),
+        var(--bg);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 20px;
+    }
+
+    .hero-name {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: normal;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--ink-2);
+      line-height: 1.65;
+      max-width: 440px;
+      margin-bottom: 40px;
+    }
+
+    .hero-tagline em {
+      font-style: italic;
+      color: var(--amber);
+    }
+
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--amber);
+      color: #fff;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background var(--trans), transform var(--trans), box-shadow var(--trans);
+    }
+    .btn-primary:hover {
+      background: var(--fire);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,93,4,0.25);
+    }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px;
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: border-color var(--trans), color var(--trans);
+    }
+    .btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* Avatar / hero visual */
+    .hero-visual {
+      display: flex; justify-content: center; align-items: center;
+    }
+
+    .avatar-ring {
+      position: relative;
+      width: 340px; height: 340px;
+    }
+
+    .avatar-circle {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--bg-card) 0%, var(--cream) 100%);
+      border: 2px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+    }
+
+    .avatar-letter {
+      font-family: var(--font-serif);
+      font-size: 6rem;
+      line-height: 1;
+      color: var(--amber);
+      opacity: 0.85;
+    }
+
+    .avatar-note {
+      font-size: 0.75rem;
+      color: var(--ink-3);
+      letter-spacing: 0.05em;
+    }
+
+    /* Floating chips around avatar */
+    .chip {
+      position: absolute;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(28,26,22,0.08);
+    }
+    .chip-1 { top: 12%;  left: -10%; }
+    .chip-2 { top: 30%;  right: -18%; }
+    .chip-3 { bottom: 28%; left: -12%; }
+    .chip-4 { bottom: 8%;  right: -8%; }
+
+    /* ─── Section base ─── */
+    section { padding: 96px 0; }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: normal;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .section-lead {
+      font-size: 1.1rem;
+      color: var(--ink-2);
+      max-width: 560px;
+      line-height: 1.75;
+    }
+
+    /* ─── Chi sono ─── */
+    .about { background: var(--cream); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--ink-2);
+      margin-bottom: 20px;
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    .about-text p strong { color: var(--ink); font-weight: 600; }
+
+    .interests-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 16px;
+      margin-top: 36px;
+    }
+
+    .interests-chips {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+
+    .interest-chip {
+      padding: 7px 16px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.82rem;
+      color: var(--ink-2);
+      transition: border-color var(--trans), color var(--trans);
+    }
+    .interest-chip:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--amber), var(--border));
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute; left: -36px; top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--amber);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--amber);
+    }
+
+    .tl-period {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--amber);
+      margin-bottom: 4px;
+    }
+
+    .tl-role {
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .tl-company { font-size: 0.9rem; color: var(--ink-3); }
+
+    /* ─── Progetti ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+
+    /* Dalla quinta card in poi — centra le ultime due */
+    @media (min-width: 900px) {
+      .projects-grid .project-card:nth-child(4) { grid-column: 1; }
+      .projects-grid .project-card:nth-child(5) { grid-column: 2; }
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      padding: 32px 28px;
+      transition: border-color var(--trans), transform var(--trans), box-shadow var(--trans);
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover {
+      border-color: var(--amber);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(193,124,58,0.12);
+    }
+
+    .project-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    .icon-fire    { background: linear-gradient(135deg, #E85D04, #FF7A1A); }
+    .icon-vanni   { background: linear-gradient(135deg, #2563EB, #60A5FA); }
+    .icon-hub     { background: linear-gradient(135deg, #E67E22, #F5A623); }
+    .icon-fridgo  { background: linear-gradient(135deg, #3A8DFF, #3CCB8F); }
+    .icon-piove   { background: linear-gradient(135deg, #4A90D9, #6BB8F0); }
+    .icon-lego    { background: linear-gradient(135deg, #F5B800, #FFD700); }
+    .icon-karate  { background: linear-gradient(135deg, #be123c, #f43f5e); }
+    .icon-animali { background: linear-gradient(135deg, #0891b2, #2dd4bf); }
+
+    /* ─── In cantiere strip ─── */
+    .cantiere-strip {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .cantiere-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 16px;
+    }
+    .cantiere-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .cantiere-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 7px 16px;
+      font-size: 0.85rem;
+      color: var(--ink-2);
+      transition: border-color var(--trans), color var(--trans);
+    }
+    .cantiere-chip:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+    .cantiere-chip-icon {
+      font-size: 1rem;
+    }
+
+    .project-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+
+    .project-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: normal;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .project-desc {
+      font-size: 0.92rem;
+      color: var(--ink-2);
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .project-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--amber);
+      transition: gap var(--trans);
+    }
+    .project-link:hover { gap: 10px; }
+    .project-link::after { content: '→'; }
+
+    /* ─── FIRE Band (cross-link to vetrina) ─── */
+    .fire-band {
+      background: var(--bg-dark);
+      color: #fff;
+      padding: 80px 0;
+    }
+
+    .fire-band-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 48px;
+    }
+
+    .fire-band-text {}
+
+    .fire-band-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fire-2);
+      margin-bottom: 16px;
+    }
+
+    .fire-band-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: normal;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .fire-band-sub {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      max-width: 440px;
+    }
+
+    .fire-band-books {
+      display: flex; gap: 16px; flex-shrink: 0;
+    }
+
+    .mini-book {
+      width: 80px; height: 112px;
+      border-radius: 4px 8px 8px 4px;
+      display: flex; align-items: flex-end; padding: 8px;
+      box-shadow: 4px 4px 16px rgba(0,0,0,0.4);
+      transition: transform var(--trans);
+    }
+    .mini-book:hover { transform: translateY(-6px) rotate(-2deg); }
+
+    .mini-book-1 { background: linear-gradient(160deg, #E85D04, #7C2D00); }
+    .mini-book-2 { background: linear-gradient(160deg, #1E3A8A, #0C1B47); }
+    .mini-book-3 { background: linear-gradient(160deg, #166534, #052E16); }
+
+    .mini-book-label {
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.3;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-fire {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 14px 32px;
+      background: var(--fire);
+      color: #fff;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background var(--trans), transform var(--trans), box-shadow var(--trans);
+    }
+    .btn-fire:hover {
+      background: var(--fire-2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,93,4,0.4);
+    }
+
+    /* ─── Scrivo section ─── */
+    .scrivo { background: var(--bg-card); }
+
+    .scrivo-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .quote-block {
+      position: relative;
+      padding: 36px 40px;
+      background: #fff;
+      border-left: 4px solid var(--amber);
+      border-radius: 0 var(--r) var(--r) 0;
+      margin: 32px 0;
+    }
+
+    .quote-mark {
+      font-family: var(--font-serif);
+      font-size: 6rem;
+      color: var(--amber);
+      opacity: 0.15;
+      position: absolute;
+      top: -16px; left: 16px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .quote-text {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .quote-source {
+      font-size: 0.82rem;
+      color: var(--ink-3);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .scrivo-links {
+      display: flex; flex-direction: column; gap: 16px; margin-top: 32px;
+    }
+
+    .scrivo-link {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      transition: border-color var(--trans), transform var(--trans);
+    }
+    .scrivo-link:hover { border-color: var(--amber); transform: translateX(4px); }
+
+    .scrivo-link-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .scrivo-link-label {
+      font-size: 0.8rem;
+      color: var(--ink-3);
+      margin-bottom: 2px;
+    }
+
+    .scrivo-link-name {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+
+    .scrivo-link-arrow {
+      margin-left: auto;
+      color: var(--ink-3);
+      font-size: 1rem;
+      transition: color var(--trans), transform var(--trans);
+    }
+    .scrivo-link:hover .scrivo-link-arrow { color: var(--amber); transform: translateX(3px); }
+
+    /* ─── Contatti ─── */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .social-grid {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .social-card {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 20px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      transition: border-color var(--trans), transform var(--trans);
+    }
+    .social-card:hover { border-color: var(--amber); transform: translateX(4px); }
+
+    .social-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .si-ig   { background: linear-gradient(135deg, #E1306C, #833AB4, #F77737); }
+    .si-li   { background: #0A66C2; }
+    .si-md   { background: #000; }
+    .si-mail { background: var(--amber); }
+
+    .social-name {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+
+    .social-handle {
+      font-size: 0.82rem;
+      color: var(--ink-3);
+    }
+
+    .social-arrow {
+      margin-left: auto;
+      color: var(--ink-3);
+      transition: color var(--trans), transform var(--trans);
+    }
+    .social-card:hover .social-arrow { color: var(--amber); transform: translateX(3px); }
+
+    .email-block {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      padding: 36px 32px;
+      margin-bottom: 32px;
+    }
+
+    .email-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 10px;
+    }
+
+    .email-address {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--amber);
+      font-weight: normal;
+    }
+
+    .email-note {
+      font-size: 0.88rem;
+      color: var(--ink-3);
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background: var(--bg-dark);
+      color: rgba(255,255,255,0.72);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .footer-logo span { color: var(--amber); }
+
+    .footer-links {
+      display: flex; gap: 24px; list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.82rem;
+      transition: color var(--trans);
+    }
+    .footer-links a:hover { color: var(--amber); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 900px) {
+      .hero-inner      { grid-template-columns: 1fr; gap: 48px; text-align: center; padding: 64px 0; }
+      .hero-tagline    { max-width: 100%; }
+      .hero-actions    { justify-content: center; }
+      .hero-visual     { display: none; }
+
+      .about-grid      { grid-template-columns: 1fr; gap: 48px; }
+      .projects-grid   { grid-template-columns: 1fr 1fr; }
+      .projects-grid .project-card:last-child { grid-column: 1 / -1; }
+      .fire-band-inner { flex-direction: column; text-align: center; }
+      .fire-band-books { justify-content: center; }
+      .scrivo-grid     { grid-template-columns: 1fr; }
+      .contact-wrap    { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .projects-grid { grid-template-columns: 1fr; }
+      section { padding: 64px 0; }
+    }
+
+    /* ─── Focus visible (accessibilità tastiera) ─── */
+    :focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .btn-primary:focus-visible,
+    .btn-secondary:focus-visible,
+    .btn-fire:focus-visible,
+    .nav-cta:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+    }
+    .project-link:focus-visible,
+    .social-card:focus-visible,
+    .scrivo-link:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+    }
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--amber);
+      border-radius: 2px;
+    }
+
+    /* ─── Scroll reveal ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    /* Intersection Observer reveal (sezioni al di sotto dell'hero) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── Mobile nav hamburger ─── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background var(--trans);
+    }
+    .nav-hamburger:hover { background: rgba(193,124,58,0.08); }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform var(--trans), opacity var(--trans);
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 600px) {
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px; left: 0; right: 0;
+        background: rgba(250,250,248,0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        flex-direction: column;
+        gap: 0;
+        border-bottom: 1px solid var(--border);
+        padding: 8px 0;
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li a {
+        display: block;
+        padding: 14px 24px;
+        font-size: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-cta { display: none; }
+    }
+
+    /* ─── Dark mode ─── */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:      #14130F;
+        --bg-card: #1E1B16;
+        --ink:     #F0EDE8;
+        --ink-2:   #BDB5AD;
+        --ink-3:   #7A7268;
+        --border:  #2C2820;
+        --cream:   #1E1B16;
+      }
+      nav { background: rgba(20,19,15,0.92); }
+      .nav-links { background: rgba(20,19,15,0.97) !important; }
+    }
+    [data-theme="dark"] {
+      --bg:      #14130F;
+      --bg-card: #1E1B16;
+      --ink:     #F0EDE8;
+      --ink-2:   #BDB5AD;
+      --ink-3:   #7A7268;
+      --border:  #2C2820;
+      --cream:   #1E1B16;
+    }
+    [data-theme="dark"] nav { background: rgba(20,19,15,0.92); }
+    [data-theme="dark"] .nav-links { background: rgba(20,19,15,0.97) !important; }
+    [data-theme="dark"] .scrivo-link { background: var(--bg-card); }
+    [data-theme="light"] {
+      --bg:      #FAFAF8;
+      --bg-card: #F4EFE8;
+      --ink:     #1C1A16;
+      --ink-2:   #4A4540;
+      --ink-3:   #8A8078;
+      --border:  #E2D9CF;
+      --cream:   #FFF8F0;
+    }
+    [data-theme="light"] nav { background: rgba(250,250,248,0.92); }
+    [data-theme="light"] .nav-links { background: rgba(250,250,248,0.97) !important; }
+
+    /* ─── Nav controls (theme + lang toggles) ─── */
+    .nav-controls {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-icon-btn {
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-family: var(--font-sans);
+      color: var(--ink-2);
+      padding: 5px 11px;
+      line-height: 1.4;
+      transition: border-color var(--trans), color var(--trans);
+    }
+    .nav-icon-btn:hover { border-color: var(--amber); color: var(--amber); }
+    @media (max-width: 600px) {
+      .nav-controls .nav-cta { display: none; }
+    }
+
+    /* ─── Newsletter band ─── */
+    .newsletter-band {
+      background: var(--bg-dark);
+      padding: 80px 0;
+    }
+    .newsletter-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+    }
+    .newsletter-text { flex: 1; }
+    .newsletter-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: normal;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .newsletter-sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 380px;
+    }
+    .newsletter-form { flex-shrink: 0; min-width: 320px; }
+    .newsletter-input-wrap {
+      display: flex;
+      gap: 0;
+      border-radius: 100px;
+      overflow: hidden;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+    }
+    .newsletter-input {
+      flex: 1;
+      padding: 14px 20px;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.92rem;
+      font-family: var(--font-sans);
+    }
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.35); }
+    .newsletter-btn {
+      padding: 14px 24px;
+      background: var(--fire);
+      color: #fff;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: background var(--trans);
+      white-space: nowrap;
+    }
+    .newsletter-btn:hover { background: var(--fire-2); }
+    .newsletter-note {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 10px;
+      padding-left: 4px;
+    }
+    @media (max-width: 900px) {
+      .newsletter-inner { flex-direction: column; gap: 32px; }
+      .newsletter-form { min-width: 0; width: 100%; }
+      .newsletter-sub { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav role="navigation" aria-label="Menu principale">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Michele <span>Navolio</span></a>
+      <ul class="nav-links" aria-label="Navigazione principale">
+        <li><a href="#chi-sono" data-i18n="nav.about">Chi sono</a></li>
+        <li><a href="#progetti" data-i18n="nav.projects">Progetti</a></li>
+        <li><a href="#libri" data-i18n="nav.books">Libri</a></li>
+        <li><a href="#contatti" data-i18n="nav.contact">Contatti</a></li>
+      </ul>
+      <div class="nav-controls">
+        <a href="mailto:michele.navolio@gmail.com?subject=Ciao%20Michele" class="nav-cta" data-i18n="nav.cta">Scrivimi</a>
+        <button id="langToggle" class="nav-icon-btn" aria-label="Switch language">EN</button>
+        <button id="themeToggle" class="nav-icon-btn" aria-label="Toggle theme">🌙</button>
+      </div>
+      <button class="nav-hamburger" id="navToggle" aria-label="Apri menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero-inner">
+
+        <div class="hero-content">
+          <span class="hero-kicker fade-up" data-i18n="hero.kicker">Scrittore · Sviluppatore · Nomade Digitale</span>
+          <h1 id="hero-title" class="hero-name fade-up delay-1">
+            Michele<br>Navolio
+          </h1>
+          <p class="hero-tagline fade-up delay-2" data-i18n-html="hero.tagline">
+            Ex Project Manager bancario, sviluppatore iOS, autore della trilogia <em>FIRE AnnoZero</em>.
+            Racconto la transizione verso una vita <em>più libera, intenzionale e presente</em>.
+          </p>
+          <div class="hero-actions fade-up delay-3">
+            <a href="#libri" class="btn-primary" data-i18n="hero.cta1">Scopri i libri</a>
+            <a href="#chi-sono" class="btn-secondary" data-i18n="hero.cta2">Chi sono</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="avatar-ring">
+            <div class="avatar-circle">
+              <span class="avatar-letter">M</span>
+              <span class="avatar-note" style="display:none;">foto in arrivo</span>
+            </div>
+            <div class="chip chip-1">📚 Trilogia FIRE</div>
+            <div class="chip chip-2">📱 Vanni · Hub · Fridgo</div>
+            <div class="chip chip-3">🚐 Nomade digitale</div>
+            <div class="chip chip-4">🥋 Karate</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CHI SONO -->
+  <section class="about" id="chi-sono" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-text">
+          <span class="section-eyebrow" data-i18n="about.eyebrow">Chi sono</span>
+          <h2 id="about-title" class="section-title" data-i18n-html="about.title">Quasi vent'anni in banca.<br>Poi, Anno Zero.</h2>
+
+          <p data-i18n-html="about.p1">Mi chiamo <strong>Michele Navolio</strong>, sono nato nel 1980 a Milano e vivo a <strong>Rozzano (MI)</strong>, nel cuore dell'hinterland milanese.
+          Ho trascorso quasi vent'anni nel settore bancario e dei pagamenti digitali —
+          prima come Project Manager App &amp; Tools in Banca Mediolanum,
+          poi come PM nella Direzione ICT. Progetti complessi, team distribuiti,
+          responsabilità crescenti.</p>
+
+          <p data-i18n-html="about.p2">All'esterno: carriera solida, stipendio fisso, ruolo riconosciuto.
+          All'interno: una stanchezza che non passava più. Domeniche pesanti.
+          La sensazione di vivere in una <strong>gabbia dorata</strong>.</p>
+
+          <p data-i18n-html="about.p3">Il 31 ottobre 2025, con un figlio in arrivo e la certezza — maturata nel tempo —
+          di avere tutte le capacità per costruire qualcosa di diverso, ho fatto la
+          <strong>scelta coraggiosa</strong> di chiudere quella carriera e aprire il mio <strong>Anno Zero</strong>:
+          costruire una vita più libera, intenzionale, presente.
+          Ho lasciato con <strong>14 mesi di pista</strong> davanti.</p>
+
+          <p data-i18n="about.p4">Oggi scrivo, sviluppo, viaggio in camper con Vanni e racconto tutto questo —
+          perché se ti ritrovi in questa storia, forse non sei il solo.</p>
+
+          <p class="interests-label" data-i18n="about.interests-label">Interessi &amp; passioni</p>
+          <div class="interests-chips">
+            <span class="interest-chip" data-i18n="about.chip1">🚐 Vita in camper</span>
+            <span class="interest-chip" data-i18n="about.chip2">📱 Sviluppo iOS</span>
+            <span class="interest-chip" data-i18n="about.chip3">🥋 Karate (cintura gialla)</span>
+            <span class="interest-chip" data-i18n="about.chip4">🚴 Ciclismo MTB</span>
+            <span class="interest-chip" data-i18n="about.chip5">💃 Salsa &amp; Bachata</span>
+            <span class="interest-chip" data-i18n="about.chip6">🤿 Sub PADI Open Water</span>
+            <span class="interest-chip" data-i18n="about.chip7">🔶 Apple Developer</span>
+            <span class="interest-chip" data-i18n="about.chip8">⚽ Milan</span>
+            <span class="interest-chip" data-i18n="about.chip9">🧱 LEGO collector</span>
+            <span class="interest-chip" data-i18n="about.chip10">🌊 Vita al mare (obiettivo)</span>
+          </div>
+        </div>
+
+        <div class="about-timeline">
+          <p class="interests-label" style="margin-top:0; margin-bottom: 28px;" data-i18n="about.timeline-label">Percorso</p>
+          <div class="timeline">
+
+            <div class="tl-item">
+              <div class="tl-period" data-i18n="tl1.period">Ott 2025 → oggi</div>
+              <div class="tl-role" data-i18n-html="tl1.role">Anno Zero — Scrittore &amp; Sviluppatore indipendente</div>
+              <div class="tl-company" data-i18n="tl1.company">Trilogia FIRE · App Vanni · Hub Life OS · Fridgo (TestFlight 1.0) · Nomade digitale</div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-period" data-i18n="tl2.period">2020 → 2025</div>
+              <div class="tl-role" data-i18n="tl2.role">Project Manager — Direzione ICT</div>
+              <div class="tl-company" data-i18n="tl2.company">Banca Mediolanum · Basiglio, MI</div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-period" data-i18n="tl3.period">2019 → 2020</div>
+              <div class="tl-role" data-i18n="tl3.role">Apple Developer Academy</div>
+              <div class="tl-company" data-i18n="tl3.company">Federico II · Napoli — Swift / SwiftUI</div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-period" data-i18n="tl4.period">2014 → 2020</div>
+              <div class="tl-role" data-i18n-html="tl4.role">Project Manager App &amp; Tools</div>
+              <div class="tl-company" data-i18n="tl4.company">Banca Mediolanum · Marketing Canali</div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-period" data-i18n="tl5.period">→ 2014</div>
+              <div class="tl-role" data-i18n="tl5.role">Mondo bancario e pagamenti digitali</div>
+              <div class="tl-company" data-i18n="tl5.company">Ruoli di progetto e innovazione</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROGETTI -->
+  <section id="progetti" aria-labelledby="progetti-title">
+    <div class="container">
+      <span class="section-eyebrow" data-i18n="proj.eyebrow">Progetti</span>
+      <h2 id="progetti-title" class="section-title" data-i18n="proj.title">Quello su cui lavoro</h2>
+      <p class="section-lead reveal" data-i18n="proj.lead">Un portafoglio che cresce dalla vita vissuta. App iOS, libri, strumenti — ogni progetto nasce da un bisogno reale che ho incontrato in prima persona.</p>
+
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-icon icon-fire">🔥</div>
+          <div class="project-tag" data-i18n="fire.tag">Editoria · In stesura</div>
+          <h3 class="project-title" data-i18n="fire.title">Trilogia FIRE AnnoZero</h3>
+          <p class="project-desc" data-i18n="fire.desc">Tre libri sul percorso reale verso la libertà finanziaria e la vita espansa.
+          Dal burnout bancario all'Anno Zero: conti, scelte, routine, metodo.
+          Non frasi motivazionali da poster — storie vere, numeri veri, paure vere.</p>
+          <a href="#libri" class="project-link" data-i18n="fire.link">Scopri i libri</a>
+        </div>
+
+        <div class="project-card reveal reveal-delay-1">
+          <div class="project-icon icon-vanni">🚐</div>
+          <div class="project-tag" data-i18n="vanni.tag">App iOS · In sviluppo</div>
+          <h3 class="project-title" data-i18n="vanni.title">Vanni</h3>
+          <p class="project-desc" data-i18n="vanni.desc">L'app del camper Vanni: pianificazione viaggi, diario di bordo, checklist,
+          manutenzione, mappe interattive, integrazione CarPlay.
+          Sviluppata in Swift/SwiftUI — nata da tremila chilometri in camper con mio figlio.</p>
+          <a href="https://www.vanniapp.com" target="_blank" rel="noopener" class="project-link" data-i18n="vanni.link">Visita vanniapp.com</a>
+        </div>
+
+        <div class="project-card reveal reveal-delay-2">
+          <div class="project-icon icon-fridgo">❄️</div>
+          <div class="project-tag" data-i18n="fridgo.tag">App iOS · TestFlight attivo</div>
+          <h3 class="project-title" data-i18n="fridgo.title">Fridgo</h3>
+          <p class="project-desc" data-i18n="fridgo.desc">Cucina con quello che hai già in frigo. Fridgo trasforma gli ingredienti in ricette,
+          piani pasto settimanali e liste della spesa intelligenti — in secondi.
+          Meno sprechi, più chiarezza. Sviluppato in Swift/SwiftUI.</p>
+          <a href="https://www.navolioappstudio.com/#app" target="_blank" rel="noopener" class="project-link" data-i18n="fridgo.link">Scopri Fridgo</a>
+        </div>
+
+        <div class="project-card reveal reveal-delay-3">
+          <div class="project-icon icon-hub">🧭</div>
+          <div class="project-tag" data-i18n="hub.tag">App iOS · Sprint 1</div>
+          <h3 class="project-title" data-i18n="hub.title">Hub — Life OS</h3>
+          <p class="project-desc" data-i18n="hub.desc">La bussola personale che ogni mattina ti dice dove mettere l'energia.
+          Life Index su 7 aree di vita, check-in in 90 secondi, nessun giudizio
+          sulla discontinuità. Dati solo sul tuo iPhone, nessun account, nessun cloud.</p>
+          <a href="https://www.navolioappstudio.com/#app" target="_blank" rel="noopener" class="project-link" data-i18n="hub.link">Scopri Hub</a>
+        </div>
+
+        <div class="project-card reveal reveal-delay-4">
+          <div class="project-icon icon-piove">🌧️</div>
+          <div class="project-tag" data-i18n="piove.tag">App iOS · Sprint 0</div>
+          <h3 class="project-title" data-i18n="piove.title">Piove!</h3>
+          <p class="project-desc" data-i18n="piove.desc">50+ attività indoor curate per genitori con bambini 3–10 anni.
+          Per trasformare le giornate di brutto tempo in momenti speciali.
+          Nata da una domenica di pioggia con Vanni — senza idee e con troppo tempo libero.</p>
+          <span class="project-link" style="opacity:0.5;cursor:default;" data-i18n="piove.wip">In sviluppo</span>
+        </div>
+
+      </div>
+
+      <!-- In cantiere -->
+      <div class="cantiere-strip reveal">
+        <p class="cantiere-label" data-i18n="cantiere.label">In cantiere — prossima ondata</p>
+        <div class="cantiere-chips">
+          <span class="cantiere-chip"><span class="cantiere-chip-icon">🧱</span> Lego Collezione</span>
+          <span class="cantiere-chip"><span class="cantiere-chip-icon">🐾</span> Dizionario Animali</span>
+          <span class="cantiere-chip"><span class="cantiere-chip-icon">🥋</span> Karate Tracker</span>
+          <span class="cantiere-chip"><span class="cantiere-chip-icon">🤿</span> Squba</span>
+          <span class="cantiere-chip"><span class="cantiere-chip-icon">💃</span> Bachata &amp; Salsa</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FIRE BAND -->
+  <div class="fire-band" id="libri">
+    <div class="container">
+      <div class="fire-band-inner">
+
+        <div class="fire-band-text">
+          <div class="fire-band-eyebrow" data-i18n="fireband.eyebrow">Trilogia FIRE AnnoZero</div>
+          <h2 class="fire-band-title" data-i18n-html="fireband.title">Tre libri.<br>Un percorso vero.</h2>
+          <p class="fire-band-sub" data-i18n="fireband.sub">Dal burnout bancario all'Anno Zero, dalla vita libera alla vita espansa.
+          La storia di un padre, di una scelta e di un nuovo inizio — in tutte le sue versioni.</p>
+          <a href="https://medium.com/@michelenavolio" target="_blank" rel="noopener" class="btn-fire" data-i18n="fireband.cta">Leggi su Medium →</a>
+        </div>
+
+        <div class="fire-band-books" aria-hidden="true">
+          <div class="mini-book mini-book-1">
+            <span class="mini-book-label">Fuoco<br>Anno Zero</span>
+          </div>
+          <div class="mini-book mini-book-2">
+            <span class="mini-book-label">La Vita<br>Libera</span>
+          </div>
+          <div class="mini-book mini-book-3">
+            <span class="mini-book-label">La Vita<br>Espansa</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIVO -->
+  <section class="scrivo" aria-labelledby="scrivo-title">
+    <div class="container">
+      <div class="scrivo-grid">
+
+        <div>
+          <span class="section-eyebrow" data-i18n="scrivo.eyebrow">Scrivo</span>
+          <h2 id="scrivo-title" class="section-title" data-i18n-html="scrivo.title">Parole su carta<br>e su schermo</h2>
+
+          <div class="quote-block">
+            <span class="quote-mark">"</span>
+            <p class="quote-text" data-i18n="scrivo.quote">Non sei obbligato a rimanere nella vita che ti sta spegnendo.</p>
+            <span class="quote-source" data-i18n="scrivo.quote-src">— FIRE – Fuoco. Il mio Anno Zero</span>
+          </div>
+
+          <p style="color: var(--ink-2); font-size: 1rem; line-height: 1.8;" data-i18n="scrivo.p1">
+            Scrivo su carta, da quando ho iniziato a tenere un diario della transizione.
+            E scrivo su Medium, dove ho pubblicato articoli tecnici durante
+            la Apple Developer Academy.
+          </p>
+          <p style="color: var(--ink-2); font-size: 1rem; line-height: 1.8; margin-top: 16px;" data-i18n="scrivo.p2">
+            Presto: una newsletter per chi vuole seguire il percorso in tempo reale.
+          </p>
+        </div>
+
+        <div>
+          <div class="scrivo-links">
+
+            <a href="https://medium.com/@michelenavolio" target="_blank" rel="noopener" class="scrivo-link">
+              <div class="scrivo-link-icon" style="background: linear-gradient(135deg,#E85D04,#FF7A1A);">📚</div>
+              <div>
+                <div class="scrivo-link-label" data-i18n="scrivo.books-label">Libri</div>
+                <div class="scrivo-link-name" data-i18n="scrivo.books-name">Trilogia FIRE AnnoZero</div>
+              </div>
+              <span class="scrivo-link-arrow">→</span>
+            </a>
+
+            <a href="https://medium.com/@michelenavolio" target="_blank" rel="noopener" class="scrivo-link">
+              <div class="scrivo-link-icon" style="background: #000; color: #fff;">M</div>
+              <div>
+                <div class="scrivo-link-label" data-i18n="scrivo.medium-label">Medium</div>
+                <div class="scrivo-link-name" data-i18n-html="scrivo.medium-name">Articoli tecnici &amp; creativi</div>
+              </div>
+              <span class="scrivo-link-arrow">→</span>
+            </a>
+
+            <a href="#contatti" class="scrivo-link">
+              <div class="scrivo-link-icon" style="background: var(--bg-card);">✉️</div>
+              <div>
+                <div class="scrivo-link-label" data-i18n="scrivo.nl-label">Newsletter</div>
+                <div class="scrivo-link-name" data-i18n="scrivo.nl-name">In arrivo — iscriviti alla lista</div>
+              </div>
+              <span class="scrivo-link-arrow">→</span>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTATTI -->
+  <section id="contatti" aria-labelledby="contatti-title">
+    <div class="container">
+      <span class="section-eyebrow" data-i18n="contact.eyebrow">Contatti</span>
+      <h2 id="contatti-title" class="section-title" data-i18n="contact.title">Scrivimi</h2>
+      <p class="section-lead" style="margin-bottom: 48px;" data-i18n="contact.lead">
+        Per domande sui libri, sull'app, su collaborazioni o semplicemente per raccontarmi la tua storia.
+      </p>
+
+      <div class="contact-wrap">
+
+        <div>
+          <div class="email-block">
+            <div class="email-label" data-i18n="contact.email-label">Email diretta</div>
+            <a href="mailto:michele.navolio@gmail.com" class="email-address">
+              michele.navolio@gmail.com
+            </a>
+            <p class="email-note" data-i18n="contact.email-note">
+              Rispondo a tutte le email. Di solito entro 48 ore, spesso prima.
+            </p>
+          </div>
+
+          <a href="mailto:michele.navolio@gmail.com" class="btn-primary" style="display: inline-block;" data-i18n="contact.email-btn">
+            Invia una email →
+          </a>
+          <a href="https://wa.me/393495605520?text=Ciao%20Michele%21" target="_blank" rel="noopener" style="display: inline-block; margin-top: 12px;">💬 WhatsApp</a>
+        </div>
+
+        <div>
+          <p class="interests-label" style="margin-top: 0; margin-bottom: 20px;" data-i18n="contact.social-label">Trovami su</p>
+          <div class="social-grid">
+
+            <a href="https://www.instagram.com/michele_navolio/" target="_blank" rel="noopener" class="social-card">
+              <div class="social-icon si-ig">📸</div>
+              <div>
+                <div class="social-name">Instagram</div>
+                <div class="social-handle">@michele_navolio · 526 follower</div>
+              </div>
+              <span class="social-arrow">→</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/michelenavolio/" target="_blank" rel="noopener" class="social-card">
+              <div class="social-icon si-li" style="color: #fff; font-weight: 700; font-size: 0.9rem;">in</div>
+              <div>
+                <div class="social-name">LinkedIn</div>
+                <div class="social-handle">Michele Navolio · 1.080 follower</div>
+              </div>
+              <span class="social-arrow">→</span>
+            </a>
+
+            <a href="https://medium.com/@michelenavolio" target="_blank" rel="noopener" class="social-card">
+              <div class="social-icon si-md" style="color: #fff; font-weight: 700; font-size: 1rem;">M</div>
+              <div>
+                <div class="social-name">Medium</div>
+                <div class="social-handle">@michelenavolio · articoli tecnici</div>
+              </div>
+              <span class="social-arrow">→</span>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER BAND -->
+  <section class="newsletter-band" aria-labelledby="newsletter-title">
+    <div class="container">
+      <div class="newsletter-inner reveal">
+        <div class="newsletter-text">
+          <span class="section-eyebrow" style="color: var(--fire-2);" data-i18n="nl.eyebrow">Newsletter</span>
+          <h2 id="newsletter-title" class="newsletter-title" data-i18n="nl.title">Seguimi in tempo reale.</h2>
+          <p class="newsletter-sub" data-i18n="nl.sub">
+            Aggiornamenti dal cantiere: app, libri, camper, numeri veri.
+            Non una newsletter da guru — una lettera ogni due settimane.
+          </p>
+        </div>
+        <form class="newsletter-form" action="https://docs.google.com/forms/d/e/1FAIpQLSc3Uvg5a0srwxNqbrF0Y2JDCYO4esGXqhGpNx994iPWm9R1eg/formResponse" method="POST" target="gf-hidden-mn" onsubmit="this.querySelector('.newsletter-btn').textContent='✓ Iscritto!';this.querySelector('.newsletter-btn').disabled=true;">
+          <div class="newsletter-input-wrap">
+            <input
+              type="email"
+              name="entry.205995899"
+              placeholder="la-tua@email.it"
+              required
+              aria-label="Il tuo indirizzo email"
+              class="newsletter-input"
+              data-i18n-placeholder="nl.placeholder"
+            />
+            <button type="submit" class="newsletter-btn" data-i18n="nl.btn">Iscriviti →</button>
+          </div>
+          <p class="newsletter-note" data-i18n="nl.note">Nessuno spam. Cancellati quando vuoi.</p>
+        </form>
+        <iframe name="gf-hidden-mn" style="display:none;" aria-hidden="true"></iframe>
+      </div>
+    </div>
+  </section>
+
+  </main><!-- /main-content -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Michele <span>Navolio</span></span>
+        <ul class="footer-links">
+          <li><a href="#chi-sono" data-i18n="footer.about">Chi sono</a></li>
+          <li><a href="#progetti" data-i18n="footer.projects">Progetti</a></li>
+          <li><a href="https://www.vanniapp.com" target="_blank" rel="noopener">Vanni</a></li>
+          <li><a href="https://www.navolioappstudio.com/#app" target="_blank" rel="noopener">Hub</a></li>
+          <li><a href="https://www.navolioappstudio.com/#app" target="_blank" rel="noopener">Fridgo</a></li>
+          <li><a href="https://medium.com/@michelenavolio" target="_blank" rel="noopener" data-i18n="footer.books">Libri FIRE</a></li>
+          <li><a href="#contatti" data-i18n="footer.contact">Contatti</a></li>
+        </ul>
+        <span class="footer-copy" data-i18n="footer.copy">© 2026 Michele Navolio</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── Intersection Observer — scroll reveal ── */
+    (function () {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+
+    /* ── Mobile nav toggle ── */
+    (function () {
+      var btn   = document.getElementById('navToggle');
+      var links = document.querySelector('.nav-links');
+      if (!btn || !links) return;
+
+      btn.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open);
+      });
+
+      /* Chiudi menu al click su un link */
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    /* ── Dark mode ── */
+    (function () {
+      var root = document.documentElement;
+      var KEY  = 'mn-theme';
+      var btn  = document.getElementById('themeToggle');
+
+      function applyTheme(theme, persist) {
+        root.setAttribute('data-theme', theme);
+        if (persist) localStorage.setItem(KEY, theme);
+        if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.content = theme === 'dark' ? '#14130F' : '#C17C3A';
+      }
+
+      var saved = localStorage.getItem(KEY);
+      applyTheme(saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), false);
+
+      if (btn) {
+        btn.addEventListener('click', function () {
+          applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+        });
+      }
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+        if (!localStorage.getItem(KEY)) applyTheme(e.matches ? 'dark' : 'light', false);
+      });
+    })();
+
+    /* ── i18n ── */
+    (function () {
+      var T = {
+        it: {
+          'nav.about':'Chi sono','nav.projects':'Progetti','nav.books':'Libri','nav.contact':'Contatti','nav.cta':'Scrivimi',
+          'hero.kicker':'Scrittore · Sviluppatore · Nomade Digitale',
+          'hero.tagline':'Ex Project Manager bancario, sviluppatore iOS, autore della trilogia <em>FIRE AnnoZero</em>. Racconto la transizione verso una vita <em>più libera, intenzionale e presente</em>.',
+          'hero.cta1':'Scopri i libri','hero.cta2':'Chi sono',
+          'about.eyebrow':'Chi sono',
+          'about.title':'Quasi vent\'anni in banca.<br>Poi, Anno Zero.',
+          'about.p1':'Mi chiamo <strong>Michele Navolio</strong>, sono nato nel 1980 a Milano e vivo a <strong>Rozzano (MI)</strong>, nel cuore dell\'hinterland milanese. Ho trascorso quasi vent\'anni nel settore bancario e dei pagamenti digitali — prima come Project Manager App &amp; Tools in Banca Mediolanum, poi come PM nella Direzione ICT. Progetti complessi, team distribuiti, responsabilità crescenti.',
+          'about.p2':'All\'esterno: carriera solida, stipendio fisso, ruolo riconosciuto. All\'interno: una stanchezza che non passava più. Domeniche pesanti. La sensazione di vivere in una <strong>gabbia dorata</strong>.',
+          'about.p3':'Il 31 ottobre 2025, con un figlio in arrivo e la certezza — maturata nel tempo — di avere tutte le capacità per costruire qualcosa di diverso, ho fatto la <strong>scelta coraggiosa</strong> di chiudere quella carriera e aprire il mio <strong>Anno Zero</strong>: costruire una vita più libera, intenzionale, presente. Ho lasciato con <strong>14 mesi di pista</strong> davanti.',
+          'about.p4':'Oggi scrivo, sviluppo, viaggio in camper con Vanni e racconto tutto questo — perché se ti ritrovi in questa storia, forse non sei il solo.',
+          'about.interests-label':'Interessi &amp; passioni',
+          'about.chip1':'🚐 Vita in camper','about.chip2':'📱 Sviluppo iOS','about.chip3':'🥋 Karate (cintura gialla)',
+          'about.chip4':'🚴 Ciclismo MTB','about.chip5':'💃 Salsa &amp; Bachata','about.chip6':'🤿 Sub PADI Open Water',
+          'about.chip7':'🔶 Apple Developer','about.chip8':'⚽ Milan','about.chip9':'🧱 LEGO collector','about.chip10':'🌊 Vita al mare (obiettivo)',
+          'about.timeline-label':'Percorso',
+          'tl1.period':'Ott 2025 → oggi','tl1.role':'Anno Zero — Scrittore &amp; Sviluppatore indipendente','tl1.company':'Trilogia FIRE · App Vanni · Hub Life OS · Fridgo (TestFlight 1.0) · Nomade digitale',
+          'tl2.period':'2020 → 2025','tl2.role':'Project Manager — Direzione ICT','tl2.company':'Banca Mediolanum · Basiglio, MI',
+          'tl3.period':'2019 → 2020','tl3.role':'Apple Developer Academy','tl3.company':'Federico II · Napoli — Swift / SwiftUI',
+          'tl4.period':'2014 → 2020','tl4.role':'Project Manager App &amp; Tools','tl4.company':'Banca Mediolanum · Marketing Canali',
+          'tl5.period':'→ 2014','tl5.role':'Mondo bancario e pagamenti digitali','tl5.company':'Ruoli di progetto e innovazione',
+          'proj.eyebrow':'Progetti','proj.title':'Quello su cui lavoro',
+          'proj.lead':'Un portafoglio che cresce dalla vita vissuta. App iOS, libri, strumenti — ogni progetto nasce da un bisogno reale che ho incontrato in prima persona.',
+          'fire.tag':'Editoria · In stesura','fire.title':'Trilogia FIRE AnnoZero',
+          'fire.desc':'Tre libri sul percorso reale verso la libertà finanziaria e la vita espansa. Dal burnout bancario all\'Anno Zero: conti, scelte, routine, metodo. Non frasi motivazionali da poster — storie vere, numeri veri, paure vere.',
+          'fire.link':'Scopri i libri',
+          'vanni.tag':'App iOS · In sviluppo','vanni.title':'Vanni',
+          'vanni.desc':'L\'app del camper Vanni: pianificazione viaggi, diario di bordo, checklist, manutenzione, mappe interattive, integrazione CarPlay. Sviluppata in Swift/SwiftUI — nata da tremila chilometri in camper con mio figlio.',
+          'vanni.link':'Visita vanniapp.com',
+          'fridgo.tag':'App iOS · TestFlight attivo','fridgo.title':'Fridgo',
+          'fridgo.desc':'Cucina con quello che hai già in frigo. Fridgo trasforma gli ingredienti in ricette, piani pasto settimanali e liste della spesa intelligenti — in secondi. Meno sprechi, più chiarezza. Sviluppato in Swift/SwiftUI.',
+          'fridgo.link':'Scopri Fridgo',
+          'hub.tag':'App iOS · Sprint 1','hub.title':'Hub — Life OS',
+          'hub.desc':'La bussola personale che ogni mattina ti dice dove mettere l\'energia. Life Index su 7 aree di vita, check-in in 90 secondi, nessun giudizio sulla discontinuità. Dati solo sul tuo iPhone, nessun account, nessun cloud.',
+          'hub.link':'Scopri Hub',
+          'piove.tag':'App iOS · Sprint 0','piove.title':'Piove!',
+          'piove.desc':'50+ attività indoor curate per genitori con bambini 3–10 anni. Per trasformare le giornate di brutto tempo in momenti speciali. Nata da una domenica di pioggia con Vanni — senza idee e con troppo tempo libero.',
+          'piove.wip':'In sviluppo','cantiere.label':'In cantiere — prossima ondata',
+          'fireband.eyebrow':'Trilogia FIRE AnnoZero','fireband.title':'Tre libri.<br>Un percorso vero.',
+          'fireband.sub':'Dal burnout bancario all\'Anno Zero, dalla vita libera alla vita espansa. La storia di un padre, di una scelta e di un nuovo inizio — in tutte le sue versioni.',
+          'fireband.cta':'Scopri la trilogia →',
+          'scrivo.eyebrow':'Scrivo','scrivo.title':'Parole su carta<br>e su schermo',
+          'scrivo.quote':'Non sei obbligato a rimanere nella vita che ti sta spegnendo.',
+          'scrivo.quote-src':'— FIRE – Fuoco. Il mio Anno Zero',
+          'scrivo.p1':'Scrivo su carta, da quando ho iniziato a tenere un diario della transizione. E scrivo su Medium, dove ho pubblicato articoli tecnici durante la Apple Developer Academy.',
+          'scrivo.p2':'Presto: una newsletter per chi vuole seguire il percorso in tempo reale.',
+          'scrivo.books-label':'Libri','scrivo.books-name':'Trilogia FIRE AnnoZero',
+          'scrivo.medium-label':'Medium','scrivo.medium-name':'Articoli tecnici &amp; creativi',
+          'scrivo.nl-label':'Newsletter','scrivo.nl-name':'In arrivo — iscriviti alla lista',
+          'contact.eyebrow':'Contatti','contact.title':'Scrivimi',
+          'contact.lead':'Per domande sui libri, sull\'app, su collaborazioni o semplicemente per raccontarmi la tua storia.',
+          'contact.email-label':'Email diretta','contact.email-note':'Rispondo a tutte le email. Di solito entro 48 ore, spesso prima.',
+          'contact.email-btn':'Invia una email →','contact.social-label':'Trovami su',
+          'nl.eyebrow':'Newsletter','nl.title':'Seguimi in tempo reale.',
+          'nl.sub':'Aggiornamenti dal cantiere: app, libri, camper, numeri veri. Non una newsletter da guru — una lettera ogni due settimane.',
+          'nl.placeholder':'la-tua@email.it','nl.btn':'Iscriviti →','nl.note':'Nessuno spam. Cancellati quando vuoi.',
+          'nl.success':'✓ Iscrizione ricevuta — a presto!',
+          'footer.about':'Chi sono','footer.projects':'Progetti','footer.books':'Libri FIRE','footer.contact':'Contatti','footer.copy':'© 2026 Michele Navolio'
+        },
+        en: {
+          'nav.about':'About','nav.projects':'Projects','nav.books':'Books','nav.contact':'Contact','nav.cta':'Write me',
+          'hero.kicker':'Writer · Developer · Digital Nomad',
+          'hero.tagline':'Former banking Project Manager, iOS developer, author of the <em>FIRE AnnoZero</em> trilogy. I document the transition toward a life that is <em>freer, more intentional, more present</em>.',
+          'hero.cta1':'Discover the books','hero.cta2':'About me',
+          'about.eyebrow':'About',
+          'about.title':'Almost twenty years in banking.<br>Then, Year Zero.',
+          'about.p1':'My name is <strong>Michele Navolio</strong>, born in 1980 in Milan, based in <strong>Rozzano (MI)</strong>, in the heart of the Milanese hinterland. I spent almost twenty years in banking and digital payments — first as an App &amp; Tools Project Manager at Banca Mediolanum, then as PM in the ICT Division. Complex projects, distributed teams, growing responsibilities.',
+          'about.p2':'On the outside: solid career, fixed salary, recognised role. On the inside: an exhaustion that never went away. Heavy Sundays. The feeling of living in a <strong>golden cage</strong>.',
+          'about.p3':'On 31 October 2025, with a son on the way and the certainty — built over time — that I had all the skills to build something different, I made the <strong>courageous choice</strong> to close that career and open my own <strong>Year Zero</strong>: building a freer, more intentional, more present life. I left with <strong>14 months of runway</strong> ahead.',
+          'about.p4':'Today I write, develop, and travel by camper van with Vanni, documenting all of it — because if you recognise yourself in this story, perhaps you\'re not alone.',
+          'about.interests-label':'Interests &amp; passions',
+          'about.chip1':'🚐 Camper van life','about.chip2':'📱 iOS development','about.chip3':'🥋 Karate (yellow belt)',
+          'about.chip4':'🚴 MTB cycling','about.chip5':'💃 Salsa &amp; Bachata','about.chip6':'🤿 PADI Open Water diver',
+          'about.chip7':'🔶 Apple Developer','about.chip8':'⚽ AC Milan fan','about.chip9':'🧱 LEGO collector','about.chip10':'🌊 Seaside life (goal)',
+          'about.timeline-label':'Journey',
+          'tl1.period':'Oct 2025 → now','tl1.role':'Year Zero — Independent Writer &amp; Developer','tl1.company':'FIRE Trilogy · Vanni App · Hub Life OS · Fridgo (TestFlight 1.0) · Digital nomad',
+          'tl2.period':'2020 → 2025','tl2.role':'Project Manager — ICT Division','tl2.company':'Banca Mediolanum · Basiglio, MI',
+          'tl3.period':'2019 → 2020','tl3.role':'Apple Developer Academy','tl3.company':'Federico II · Naples — Swift / SwiftUI',
+          'tl4.period':'2014 → 2020','tl4.role':'App &amp; Tools Project Manager','tl4.company':'Banca Mediolanum · Channel Marketing',
+          'tl5.period':'→ 2014','tl5.role':'Banking and digital payments','tl5.company':'Project and innovation roles',
+          'proj.eyebrow':'Projects','proj.title':'What I\'m working on',
+          'proj.lead':'A portfolio that grows from lived experience. iOS apps, books, tools — every project was born from a real need I encountered first-hand.',
+          'fire.tag':'Publishing · In progress','fire.title':'FIRE AnnoZero Trilogy',
+          'fire.desc':'Three books on the real path toward financial freedom and expanded living. From banking burnout to Year Zero: money, decisions, routines, method. No motivational poster phrases — real stories, real numbers, real fears.',
+          'fire.link':'Discover the books',
+          'vanni.tag':'iOS App · In development','vanni.title':'Vanni',
+          'vanni.desc':'The Vanni camper van app: trip planning, logbook, checklists, maintenance, interactive maps, CarPlay integration. Built in Swift/SwiftUI — born from three thousand kilometres on the road with my son.',
+          'vanni.link':'Visit vanniapp.com',
+          'fridgo.tag':'iOS App · TestFlight active','fridgo.title':'Fridgo',
+          'fridgo.desc':'Cook with what you already have in the fridge. Fridgo turns ingredients into recipes, weekly meal plans, and smart shopping lists — in seconds. Less waste, more clarity. Built in Swift/SwiftUI.',
+          'fridgo.link':'Discover Fridgo',
+          'hub.tag':'iOS App · Sprint 1','hub.title':'Hub — Life OS',
+          'hub.desc':'The personal compass that tells you each morning where to focus your energy. Life Index across 7 life areas, 90-second check-in, no judgement on gaps. Data stays on your iPhone — no account, no cloud.',
+          'hub.link':'Discover Hub',
+          'piove.tag':'iOS App · Sprint 0','piove.title':'Piove! (Raining!)',
+          'piove.desc':'50+ curated indoor activities for parents with children aged 3–10. To turn bad-weather days into special moments. Born from a rainy Sunday with Vanni — out of ideas, with too much free time.',
+          'piove.wip':'In development','cantiere.label':'On the horizon — next wave',
+          'fireband.eyebrow':'FIRE AnnoZero Trilogy','fireband.title':'Three books.<br>One real journey.',
+          'fireband.sub':'From banking burnout to Year Zero, from free living to expanded living. The story of a father, a choice and a new beginning — in all its forms.',
+          'fireband.cta':'Discover the trilogy →',
+          'scrivo.eyebrow':'Writing','scrivo.title':'Words on paper<br>and on screen',
+          'scrivo.quote':'You are not obligated to stay in the life that is extinguishing you.',
+          'scrivo.quote-src':'— FIRE – Fire. My Year Zero',
+          'scrivo.p1':'I write on paper, since I started keeping a diary of the transition. And I write on Medium, where I published technical articles during the Apple Developer Academy.',
+          'scrivo.p2':'Coming soon: a newsletter for those who want to follow the journey in real time.',
+          'scrivo.books-label':'Books','scrivo.books-name':'FIRE AnnoZero Trilogy',
+          'scrivo.medium-label':'Medium','scrivo.medium-name':'Technical &amp; creative articles',
+          'scrivo.nl-label':'Newsletter','scrivo.nl-name':'Coming soon — join the list',
+          'contact.eyebrow':'Contact','contact.title':'Write me',
+          'contact.lead':'For questions about the books, the apps, collaborations, or simply to share your story.',
+          'contact.email-label':'Direct email','contact.email-note':'I reply to all emails. Usually within 48 hours, often sooner.',
+          'contact.email-btn':'Send an email →','contact.social-label':'Find me on',
+          'nl.eyebrow':'Newsletter','nl.title':'Follow me in real time.',
+          'nl.sub':'Updates from the workshop: apps, books, camper van, real numbers. Not a guru newsletter — a letter every two weeks.',
+          'nl.placeholder':'your@email.com','nl.btn':'Subscribe →','nl.note':'No spam. Unsubscribe anytime.',
+          'nl.success':'✓ Subscription received — see you soon!',
+          'footer.about':'About','footer.projects':'Projects','footer.books':'FIRE Books','footer.contact':'Contact','footer.copy':'© 2026 Michele Navolio'
+        }
+      };
+
+      function applyLang(lang) {
+        document.documentElement.lang = lang;
+        localStorage.setItem('mn-lang', lang);
+        var btn = document.getElementById('langToggle');
+        if (btn) btn.textContent = lang === 'it' ? 'EN' : 'IT';
+        var t = T[lang];
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var k = el.getAttribute('data-i18n');
+          if (t[k] !== undefined) el.textContent = t[k];
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+          var k = el.getAttribute('data-i18n-html');
+          if (t[k] !== undefined) el.innerHTML = t[k];
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+          var k = el.getAttribute('data-i18n-placeholder');
+          if (t[k] !== undefined) el.placeholder = t[k];
+        });
+      }
+
+      var saved = localStorage.getItem('mn-lang');
+      applyLang((saved === 'it' || saved === 'en') ? saved : 'it');
+
+      var langBtn = document.getElementById('langToggle');
+      if (langBtn) {
+        langBtn.addEventListener('click', function () {
+          applyLang(document.documentElement.lang === 'it' ? 'en' : 'it');
+        });
+      }
+    })();
+  </script>
+
+<!-- WhatsApp sticky button -->
+<a href="https://wa.me/393495605520?text=Ciao%20Michele%21"
+   target="_blank" rel="noopener"
+   title="Scrivimi su WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:white;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);text-decoration:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+  <!-- ──────────────────────────────────────────────────────
+       CRO Tracking — michelenavolio.com (v1, 2026-06)
+       8 eventi GA4 (G-DY7FPZ8E8L). Vedi cro_plan_2026-06.md
+  ────────────────────────────────────────────────────── -->
+  <script>
+  (function () {
+    'use strict';
+    if (typeof gtag !== 'function') return;
+    var SITE = 'michelenavolio';
+    function track(name, params) {
+      params = params || {};
+      params.site = SITE;
+      gtag('event', name, params);
+    }
+
+    /* 1. CTA click */
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.btn-primary, .btn-fire, .nav-cta, .btn-secondary');
+      if (!btn) return;
+      track('cta_click', {
+        cta_text:   (btn.innerText || '').trim().slice(0, 60),
+        cta_target: btn.getAttribute('href') || '',
+        location:   btn.closest('section, nav, footer')?.id || 'unknown'
+      });
+    });
+
+    /* 2. Email (mailto) */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="mailto:"]');
+      if (!a) return;
+      track('email_click', {
+        email_to: a.getAttribute('href').replace('mailto:', '').split('?')[0],
+        location: a.closest('section')?.id || 'unknown'
+      });
+    });
+
+    /* 3. Social + 4. Outbound */
+    var SOCIAL_MAP = {
+      'instagram.com':'instagram', 'linkedin.com':'linkedin',
+      'medium.com':'medium', 'x.com':'twitter', 'github.com':'github'
+    };
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="http"]');
+      if (!a) return;
+      try {
+        var host = (new URL(a.href, location.href)).hostname.replace('www.','');
+        if (host === location.hostname.replace('www.','')) return;
+        var network = SOCIAL_MAP[host];
+        if (network) {
+          track('social_click', { network: network, location: a.closest('section')?.id || 'unknown' });
+        } else {
+          track('outbound_click', {
+            link_domain: host,
+            link_url:    a.href,
+            link_text:   (a.innerText || '').trim().slice(0, 60)
+          });
+        }
+      } catch (_) {}
+    });
+
+    /* 5. Scroll depth 25/50/75/90 */
+    var fired = {};
+    function checkScroll() {
+      var h = document.documentElement;
+      var pct = Math.round(((h.scrollTop + window.innerHeight) / h.scrollHeight) * 100);
+      [25, 50, 75, 90].forEach(function (mark) {
+        if (pct >= mark && !fired[mark]) {
+          fired[mark] = true;
+          track('scroll_depth', { percent: mark });
+        }
+      });
+    }
+    var scrollTimer;
+    window.addEventListener('scroll', function () {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(checkScroll, 250);
+    }, { passive: true });
+
+    /* 6. Newsletter submit */
+    var nlForm = document.querySelector('.newsletter-form');
+    if (nlForm) {
+      nlForm.addEventListener('submit', function () {
+        var input = nlForm.querySelector('.newsletter-input');
+        var email = (input && input.value) || '';
+        var domain = email.split('@')[1] || 'unknown';
+        track('newsletter_submit', {
+          email_domain: domain,
+          form_location: 'newsletter_band'
+        });
+      });
+    }
+
+    /* 7. Book card view */
+    if ('IntersectionObserver' in window) {
+      var bookObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          track('book_card_view', {
+            book_id: en.target.querySelector('.mini-book-label')?.innerText.trim().slice(0,30) || 'unknown'
+          });
+          bookObs.unobserve(en.target);
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.mini-book').forEach(function (b) { bookObs.observe(b); });
+    }
+
+    /* 8. Project card link click */
+    document.querySelectorAll('.project-card .project-link').forEach(function (a) {
+      a.addEventListener('click', function () {
+        track('project_card_click', {
+          project_id: a.closest('.project-card')?.querySelector('.project-title')?.innerText.trim() || 'unknown',
+          link_url: a.getAttribute('href') || ''
+        });
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>
